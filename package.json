@@ -1,6 +1,6 @@
 {
-  "name": "validation",
-  "version": "1.0.0",
+  "name": "validationjs",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "dependencies": {
