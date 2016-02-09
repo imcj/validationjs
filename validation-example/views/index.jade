@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-4
+        div(class=['panel', 'panel-default'])
+          .panel-heading
+            h3(class='panel-title') 注册
+          .panel-body
+            form(method="post", enctype="application/x-www-form-urlencoded")
+              div(class=['form-group', form.email.hasErrors() ? 'has-error':''])
+                label(for='email', class='control-label') 邮件地址
+                input(type='email', class='form-control', placeholder='#{form.email.getPlaceholder()}', name="username", value='#{form.email.value}')
+                if form.email.hasErrors()
+                  each error in form.email.errors
+                    span(class='help-block') #{error.message}
+              div(class=['form-group', form.password.hasErrors() ? 'has-error':''])
+                label(for='password') 密码
+                input(type='password', class='form-control', placeholder='', name="password", value='#{form.password.value}')
+              div(class=['form-group', form.passwordAgain.hasErrors() ? 'has-error':''])
+                label(for='passwordAgain') 再次输入密码
+                input(type='password', class='form-control', placeholder='', name='passwordAgain', value='#{form.passwordAgain.value}')
+                span(class='help-block') 请重复输入密码
+              button(type='submit', class=['btn', 'btn-primary']) 注册

@@ -1,0 +1,18 @@
+{
+  "name": "validation-example",
+  "description": "",
+  "main": "",
+  "authors": [
+    "CJ <weicongju@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
