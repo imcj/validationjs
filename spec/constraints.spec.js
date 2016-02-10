@@ -65,13 +65,13 @@ describe("Integer", function() {
     })
 
     it("Should is integer", function() {
-        var result = integerValidator.validate("age", "年龄", {"age": null})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = integerValidator.validate("age", "年龄", {"age": null})
+        expect(errors.length == 1).toBeTruthy()
     })
 
     it("Should is integer if float", function() {
-        var result = integerValidator.validate("age", "年龄", {"age": 10.1})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = integerValidator.validate("age", "年龄", {"age": 10.1})
+        expect(errors.length == 1).toBeTruthy()
     })
 })
 
@@ -86,14 +86,14 @@ describe("Array", function() {
     })
 
     it("Should is array", function() {
-        var result = arrayValidator.validate("images", "图片", {"images": []})
-        expect(result.hasErrors()).toBeFalsy()
+        var errors = arrayValidator.validate("images", "图片", {"images": []})
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should is array when image is null", function() {
-        var result = arrayValidator.validate("images", "图片",
+        var errors = arrayValidator.validate("images", "图片",
             {"images": "null"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 
     // TODO
@@ -111,28 +111,28 @@ describe("Numeric", function() {
     })
 
     it("Should is integer", function() {
-        var result = numericValidator.validate("age", "年龄", {"age": null})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = numericValidator.validate("age", "年龄", {"age": null})
+        expect(errors.length > 0).toBeTruthy()
     })
 
     it("Should is integer if float", function() {
-        var result = numericValidator.validate("age", "年龄", {"age": 10.1})
-        expect(result.hasErrors()).toBeFalsy()
+        var errors = numericValidator.validate("age", "年龄", {"age": 10.1})
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should is integer if integer", function() {
-        var result = numericValidator.validate("age", "年龄", {"age": 10})
-        expect(result.hasErrors()).toBeFalsy()
+        var errors = numericValidator.validate("age", "年龄", {"age": 10})
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should is integer if string", function() {
-        var result = numericValidator.validate("age", "年龄", {"age": "10"})
-        expect(result.hasErrors()).toBeFalsy()
+        var errors = numericValidator.validate("age", "年龄", {"age": "10"})
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should is integer if string but not numeric", function() {
-        var result = numericValidator.validate("age", "年龄", {"age": "10a"})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = numericValidator.validate("age", "年龄", {"age": "10a"})
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -147,21 +147,21 @@ describe("Alpha", function() {
     })
 
     it("Should is alpha", function() {
-        var result = alphaValidator.validate("username", "用户名",
+        var errors = alphaValidator.validate("username", "用户名",
             {"username": "cj"})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should is alpha but not", function() {
-        var result = alphaValidator.validate("username", "用户名",
+        var errors = alphaValidator.validate("username", "用户名",
             {"username": "30"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 
     it("Should is alpha but is null", function() {
-        var result = alphaValidator.validate("username", "用户名",
+        var errors = alphaValidator.validate("username", "用户名",
             {"username": null})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -177,21 +177,21 @@ describe("Alpha numeric", function() {
     })
 
     it("Should is alpha numeric", function() {
-        var result = alphaNumericValidator.validate("username", "用户名",
+        var errors = alphaNumericValidator.validate("username", "用户名",
             {"username": "cj01"})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should is alpha numeric but not", function() {
-        var result = alphaNumericValidator.validate("username", "用户名",
+        var errors = alphaNumericValidator.validate("username", "用户名",
             {"username": "30 "})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 
     it("Should is alpha numeric but is null", function() {
-        var result = alphaNumericValidator.validate("username", "用户名",
+        var errors = alphaNumericValidator.validate("username", "用户名",
             {"username": null})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -207,21 +207,21 @@ describe("Alpha numeric space", function() {
     })
 
     it("Should is alpha numeric", function() {
-        var result = alphaNumericSpaceValidator.validate("username", "用户名",
+        var errors = alphaNumericSpaceValidator.validate("username", "用户名",
             {"username": "cj11 "})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should is alpha numeric space but not", function() {
-        var result = alphaNumericSpaceValidator.validate("username", "用户名",
+        var errors = alphaNumericSpaceValidator.validate("username", "用户名",
             {"username": "cj11 -"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 
     it("Should is alpha numeric but is null", function() {
-        var result = alphaNumericSpaceValidator.validate("username", "用户名",
+        var errors = alphaNumericSpaceValidator.validate("username", "用户名",
             {"username": null})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -237,21 +237,21 @@ describe("Alpha dash", function() {
     })
 
     it("Should is alpha dash space", function() {
-        var result = alphaDashValidator.validate("username", "用户名",
+        var errors = alphaDashValidator.validate("username", "用户名",
             {"username": "cj11-"})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should is alpha dash but not", function() {
-        var result = alphaDashValidator.validate("username", "用户名",
+        var errors = alphaDashValidator.validate("username", "用户名",
             {"username": "30 -"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 
     it("Should is alpha dash but is null", function() {
-        var result = alphaDashValidator.validate("username", "用户名",
+        var errors = alphaDashValidator.validate("username", "用户名",
             {"username": null})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -266,17 +266,17 @@ describe("Boolean", function() {
     })
 
     it("Shoud is boolean", function() {
-        var result = booleanValidator.validate("agree", "同意协议",
+        var errors = booleanValidator.validate("agree", "同意协议",
             {"agree": true})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
 
-        var result = booleanValidator.validate("agree", "同意协议",
+        var errors = booleanValidator.validate("agree", "同意协议",
             {"agree": 1})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
 
-        var result = booleanValidator.validate("agree", "同意协议",
+        var errors = booleanValidator.validate("agree", "同意协议",
             {"agree": "true"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -288,12 +288,12 @@ describe("Between", function() {
     })
 
     it("Should is range", function() {
-        var result = betweenValidator.validate("age", "年龄", {"age": 18})
-        expect(result.hasErrors()).toBeFalsy()
-        var result = betweenValidator.validate("age", "年龄", {"age": 0})
-        expect(result.hasErrors()).toBeTruthy()
-        var result = betweenValidator.validate("age", "年龄", {"age": 21})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = betweenValidator.validate("age", "年龄", {"age": 18})
+        expect(errors.length > 0).toBeFalsy()
+        var errors = betweenValidator.validate("age", "年龄", {"age": 0})
+        expect(errors.length > 0).toBeTruthy()
+        var errors = betweenValidator.validate("age", "年龄", {"age": 21})
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -303,10 +303,10 @@ describe("Max and min", function() {
 
         expect(constraints.MaxConstraint.constraintName).toEqual("max")
 
-        var result = maxValidator.validate("age", "年龄", {"age": 18})
-        expect(result.hasErrors()).toBeFalsy()
-        var result = maxValidator.validate("age", "年龄", {"age": 100})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = maxValidator.validate("age", "年龄", {"age": 18})
+        expect(errors.length > 0).toBeFalsy()
+        var errors = maxValidator.validate("age", "年龄", {"age": 100})
+        expect(errors.length > 0).toBeTruthy()
     })
 
     it("min", function() {
@@ -314,10 +314,10 @@ describe("Max and min", function() {
 
         expect(constraints.MinConstraint.constraintName).toEqual("min")
 
-        var result = minValidator.validate("age", "年龄", {"age": 17})
-        expect(result.hasErrors()).toBeTruthy()
-        var result = minValidator.validate("age", "年龄", {"age": 18})
-        expect(result.hasErrors()).toBeFalsy()
+        var errors = minValidator.validate("age", "年龄", {"age": 17})
+        expect(errors.length > 0).toBeTruthy()
+        var errors = minValidator.validate("age", "年龄", {"age": 18})
+        expect(errors.length > 0).toBeFalsy()
     })
 })
 
@@ -326,10 +326,10 @@ describe("TrueValidator", function() {
     it("Should vlaidate", function() {
         expect(constraints.TrueConstraint.constraintName).toEqual("true")
 
-        var result = trueValidator.validate("true", "真实", {"true": true})
-        expect(result.hasErrors()).toBeFalsy()
-        var result = trueValidator.validate("true", "真实", {"true": false})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = trueValidator.validate("true", "真实", {"true": true})
+        expect(errors.length > 0).toBeFalsy()
+        var errors = trueValidator.validate("true", "真实", {"true": false})
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -340,10 +340,10 @@ describe("FalseValidator", function() {
 
         expect(constraints.FalseConstraint.constraintName).toEqual("false")
 
-        var result = falseValidator.validate("true", "真实", {"true": false})
-        expect(result.hasErrors()).toBeFalsy()
-        var result = falseValidator.validate("true", "真实", {"true": true})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = falseValidator.validate("true", "真实", {"true": false})
+        expect(errors.length > 0).toBeFalsy()
+        var errors = falseValidator.validate("true", "真实", {"true": true})
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -354,10 +354,10 @@ describe("YesValidator", function() {
 
         expect(constraints.YesConstraint.constraintName).toEqual("yes")
 
-        var result = trueValidator.validate("true", "真实", {"true": true})
-        expect(result.valid()).toBeTruthy()
-        var result = trueValidator.validate("true", "真实", {"true": false})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = trueValidator.validate("true", "真实", {"true": true})
+        expect(errors.length < 1).toBeTruthy()
+        var errors = trueValidator.validate("true", "真实", {"true": false})
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -368,10 +368,10 @@ describe("NoValidator", function() {
 
         expect(constraints.NoConstraint.constraintName).toEqual("no")
 
-        var result = noValidator.validate("true", "真实", {"true": false})
-        expect(result.hasErrors()).toBeFalsy()
-        var result = noValidator.validate("true", "真实", {"true": true})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = noValidator.validate("true", "真实", {"true": false})
+        expect(errors.length > 0).toBeFalsy()
+        var errors = noValidator.validate("true", "真实", {"true": true})
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -381,11 +381,11 @@ describe("GreaterValidator", function() {
     it("Should greater", function() {
         expect(constraints.GreaterConstraint.constraintName).toEqual("greater")
 
-        var result = greaterValidator.validate("age", "年龄", {"age": 10})
-        expect(result.hasErrors()).toBeTruthy()
+        var errors = greaterValidator.validate("age", "年龄", {"age": 10})
+        expect(errors.length > 0).toBeTruthy()
 
-        result = greaterValidator.validate("age", "年龄", {"age": 11})
-        expect(result.hasErrors()).toBeTruthy()
+        errors = greaterValidator.validate("age", "年龄", {"age": 11})
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -395,11 +395,11 @@ describe("GreaterThanValidator", function() {
     it("Should greater than", function() {
         expect(constraints.GreaterThanConstraint.constraintName)
             .toEqual("greaterThan")
-        var result = greaterThanValidator.validate("age", "年龄", {"age": 11})
-        expect(result.valid).toBeTruthy()
+        var errors = greaterThanValidator.validate("age", "年龄", {"age": 11})
+        expect(errors.length < 1).toBeTruthy()
 
-        result = greaterThanValidator.validate("age", "年龄", {"age": 10})
-        expect(result.valid()).toBeFalsy()
+        errors = greaterThanValidator.validate("age", "年龄", {"age": 10})
+        expect(errors.length < 1).toBeFalsy()
     })
 })
 
@@ -410,24 +410,24 @@ describe("LessValidator", function() {
     it("Should less", function() {
         expect(constraints.LessConstraint.constraintName).toEqual("less")
 
-        var result = lessValidator.validate("age", "年龄", {"age": 99})
-        expect(result.hasErrors()).toBeFalsy()
+        var errors = lessValidator.validate("age", "年龄", {"age": 99})
+        expect(errors.length > 0).toBeFalsy()
 
-        result = lessValidator.validate("age", "年龄", {"age": 100})
-        expect(result.valid()).toBeFalsy()
+        errors = lessValidator.validate("age", "年龄", {"age": 100})
+        expect(errors.length < 1).toBeFalsy()
     })
 
     it("Should less than", function() {
         expect(constraints.LessThanConstraint.constraintName).toEqual("lessThan")
 
-        var result = lessThanValidator.validate("age", "年龄", {"age": 99})
-        expect(result.hasErrors()).toBeFalsy()
+        var errors = lessThanValidator.validate("age", "年龄", {"age": 99})
+        expect(errors.length > 0).toBeFalsy()
 
-        result = lessThanValidator.validate("age", "年龄", {"age": 100})
-        expect(result.hasErrors()).toBeFalsy()
+        errors = lessThanValidator.validate("age", "年龄", {"age": 100})
+        expect(errors.length > 0).toBeFalsy()
 
-        result = lessThanValidator.validate("age", "年龄", {"age": 101})
-        expect(result.hasErrors()).toBeTruthy()
+        errors = lessThanValidator.validate("age", "年龄", {"age": 101})
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -437,15 +437,15 @@ describe("JSON validator", function() {
     it("Should json", function() {
         expect(constraints.JSONConstraint.constraintName).toEqual("json")
 
-        var result = jsonValidator.validate("json", "JSON",
+        var errors = jsonValidator.validate("json", "JSON",
             {"json": "{\"yes\":true}"})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
     })
 
     it("Should json failure", function() {
-        var result = jsonValidator.validate("json", "JSON",
+        var errors = jsonValidator.validate("json", "JSON",
             {"json": "{yes:true"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 })
 
@@ -456,25 +456,25 @@ describe("In or not in validator", function() {
     it("Should in", function() {
         expect(constraints.InConstraint.constraintName).toEqual("in")
 
-        var result =
+        var errors =
         inValidator.validate("language", "语言", {"language": "en"})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
 
-        result =
+        errors =
         inValidator.validate("language", "语言", {"language": "de"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 
     it("Should not in", function() {
         expect(constraints.NotInConstraint.constraintName).toEqual("notIn")
 
-        var result =
+        var errors =
             notInValidator.validate("language", "语言", {"language": "en"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
 
-        result =
+        errors =
             notInValidator.validate("language", "语言", {"language": "de"})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
     })
 })
 
@@ -504,13 +504,13 @@ describe("Confirmed and different", function() {
         var validator = new constraints.ConfirmedConstraint("password")
         expect(constraints.ConfirmedConstraint.constraintName).toEqual("confirmed")
 
-        var result = validator.validate("passwordAgain", "重新输入密码",
+        var errors = validator.validate("passwordAgain", "重新输入密码",
             {"password": "123", "passwordAgain": "123"})
-        expect(result.hasErrors()).toBeFalsy()
+        expect(errors.length > 0).toBeFalsy()
 
-        result = validator.validate("passwordAgain", "重新输入密码",
+        errors = validator.validate("passwordAgain", "重新输入密码",
             {"password": "123", "passwordAgain": "321"})
-        expect(result.hasErrors()).toBeTruthy()
+        expect(errors.length > 0).toBeTruthy()
     })
 
     it("Different", function() {
@@ -518,13 +518,13 @@ describe("Confirmed and different", function() {
         expect(constraints.DifferentConstraint.constraintName)
             .toEqual("different")
 
-        var result = validator.validate("second", "Second",
+        var errors = validator.validate("second", "Second",
             {"first": 1, "second": 2})
-        expect(result.valid()).toBeTruthy()
+        expect(errors.length < 1).toBeTruthy()
 
-        result = validator.validate("second", "Second",
+        errors = validator.validate("second", "Second",
             {"first": 1, "second": 1})
-        expect(result.valid()).toBeFalsy()
+        expect(errors.length < 1).toBeFalsy()
     })
 })
 
@@ -533,13 +533,13 @@ describe("Ip validator", function() {
         var validator = new constraints.IPConstraint()
         expect(constraints.IPConstraint.constraintName).toEqual("ip")
 
-        var result = validator.validate("ip", "IP",
+        var errors = validator.validate("ip", "IP",
             {"ip": "127.0.0.1"})
-        expect(result.valid()).toBeTruthy()
+        expect(errors.length < 1).toBeTruthy()
 
-        result = validator.validate("ip", "IP",
+        errors = validator.validate("ip", "IP",
             {"ip": "127.0.0."})
-        expect(result.valid()).toBeFalsy()
+        expect(errors.length < 1).toBeFalsy()
     })
 })
 
@@ -548,13 +548,13 @@ describe("Regexpress validator", function() {
         var validator = new constraints.RegexConstraint(/^\d+$/, "必需是数字")
         expect(constraints.RegexConstraint.constraintName).toEqual("regex")
 
-        var result = validator.validate("age", "Age",
+        var errors = validator.validate("age", "Age",
             {"age": "30"})
-        expect(result.valid()).toBeTruthy()
-        result = validator.validate("age", "Age",
+        expect(errors.length < 1).toBeTruthy()
+        errors = validator.validate("age", "Age",
             {"age": "30a"})
-        expect(result.valid()).toBeFalsy()
-        expect(result.errors[0].message).toEqual("必需是数字")
+        expect(errors.length < 1).toBeFalsy()
+        expect(errors[0].message).toEqual("必需是数字")
     })
 })
 
@@ -562,25 +562,25 @@ describe("Digits", function() {
     it("Should exact length", function() {
         var validator = new constraints.DigitsConstraint(4)
         expect(constraints.DigitsConstraint.constraintName).toEqual("digits")
-        var result = validator.validate("secret", "Secret", {"secret": 6688})
-        expect(result.valid()).toBeTruthy()
+        var errors = validator.validate("secret", "Secret", {"secret": 6688})
+        expect(errors.length < 1).toBeTruthy()
 
-        result = validator.validate("secret", "Secret", {"secret": 66888})
-        expect(result.valid()).toBeFalsy()
+        errors = validator.validate("secret", "Secret", {"secret": 66888})
+        expect(errors.length < 1).toBeFalsy()
     })
 
     it("Should between the given min and max", function() {
         var validator = new constraints.DigitsBetweenConstraint(18, 30)
         expect(constraints.DigitsBetweenConstraint.constraintName)
             .toEqual("digitsBetween")
-        var result = validator.validate("age", "Age", {age: 18})
-        expect(result.valid()).toBeTruthy()
-        result = validator.validate("age", "Age", {age: 30})
-        expect(result.valid()).toBeTruthy()
-        result = validator.validate("age", "Age", {age: 17})
-        expect(result.valid()).toBeFalsy()
-        result = validator.validate("age", "Age", {age: 31})
-        expect(result.valid()).toBeFalsy()
+        var errors = validator.validate("age", "Age", {age: 18})
+        expect(errors.length < 1).toBeTruthy()
+        errors = validator.validate("age", "Age", {age: 30})
+        expect(errors.length < 1).toBeTruthy()
+        errors = validator.validate("age", "Age", {age: 17})
+        expect(errors.length < 1).toBeFalsy()
+        errors = validator.validate("age", "Age", {age: 31})
+        expect(errors.length < 1).toBeFalsy()
     })
 })
 
@@ -589,11 +589,11 @@ describe("URL", function() {
         var validator = new constraints.URLConstraint()
         expect(constraints.URLConstraint.constraintName).toEqual("url")
 
-        var result = validator.validate("url", "URL",
+        var errors = validator.validate("url", "URL",
             {"url": "http://github.com"})
-        expect(result.valid()).toBeTruthy()
-        result = validator.validate("url", "URL",
+        expect(errors.length < 1).toBeTruthy()
+        errors = validator.validate("url", "URL",
             {"url": "http://github"})
-        expect(result.valid()).toBeFalsy()
+        expect(errors.length < 1).toBeFalsy()
     })
 })
