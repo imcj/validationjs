@@ -1,5 +1,5 @@
 var models = require('./models'),
-    FieldError = require("validationjs/lib/result").FieldError
+    FieldError = require("validationjs/lib/validation").FieldError
 
 var UniqueUsernameConstraint = function(message) {
     this.validate = function(fieldName, fieldLabel, data) {

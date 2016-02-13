@@ -1,4 +1,4 @@
-var validator = require("../"),
+var validator = require(/*'../'), //*/"validationjs"),
     constraints = require('./constraints')
 
 var registration = validator("RegistrationForm")

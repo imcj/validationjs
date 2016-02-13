@@ -3,7 +3,8 @@ var router = express.Router();
 var form = require("../form"),
     User = require('../models').User,
     validator = require('../../'),
-    crypto = require('crypto')
+    crypto = require('crypto'),
+    debug = require('debug')("validationjs")
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -55,6 +56,8 @@ router.all('/signin', function(req, res) {
                     if (null == user) {
                         return ["错误的用户名或者密码"]
                     }
+                }).catch(function(error) {
+                    console.stack(error)
                 })
             })
         .new()
@@ -66,8 +69,15 @@ router.all('/signin', function(req, res) {
     }
 
     if ("POST" == req.method) {
+        debug("/signin post")
         signin.validate(req.body).then(function() {
-            render()
+            if (signin.valid())
+                res.render('signin_success')
+            else
+                render()
+        }).catch(function(error) {
+            debug(error)
+            debug(error.stack)
         })
     } else
         render()
