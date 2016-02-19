@@ -281,19 +281,31 @@ describe("Boolean", function() {
 })
 
 describe("Between", function() {
-    var betweenValidator = new constraints.BetweenConstraint(1, 20)
-
     it("Should right name", function() {
         expect(constraints.BetweenConstraint.constraintName).toEqual("between")
     })
 
     it("Should is range", function() {
+        var betweenValidator = new constraints.BetweenConstraint(1, 20)
         var errors = betweenValidator.validate("age", "年龄", {"age": 18})
-        expect(errors.length > 0).toBeFalsy()
+        expect(errors).toEqual([])
         var errors = betweenValidator.validate("age", "年龄", {"age": 0})
-        expect(errors.length > 0).toBeTruthy()
+        expect(errors).not.toEqual([])
         var errors = betweenValidator.validate("age", "年龄", {"age": 21})
-        expect(errors.length > 0).toBeTruthy()
+        expect(errors).not.toEqual([])
+    })
+
+    it("Should is range for string", function() {
+        var betweenValidator = new constraints.BetweenConstraint(2, 4)
+        var errors = betweenValidator.validate("password", "密码",
+            {"password": "12"})
+        expect(errors).toEqual([])
+        var errors = betweenValidator.validate("password", "密码",
+            {"password": "1"})
+        expect(errors).not.toEqual([])
+        var errors = betweenValidator.validate("password", "密码",
+            {"password": "12345"})
+        expect(errors).not.toEqual([])
     })
 })
 
@@ -307,6 +319,14 @@ describe("Max and min", function() {
         expect(errors.length > 0).toBeFalsy()
         var errors = maxValidator.validate("age", "年龄", {"age": 100})
         expect(errors.length > 0).toBeTruthy()
+
+        var passwordMaxValidator = new constraints.MaxConstraint(2)
+        errors = passwordMaxValidator
+            .validate("password", "密码", {"password": "abc"})
+        expect(errors).not.toEqual([])
+        errors = passwordMaxValidator
+            .validate("password", "密码", {"password": "ab"})
+        expect(errors).toEqual([])
     })
 
     it("min", function() {
@@ -318,6 +338,15 @@ describe("Max and min", function() {
         expect(errors.length > 0).toBeTruthy()
         var errors = minValidator.validate("age", "年龄", {"age": 18})
         expect(errors.length > 0).toBeFalsy()
+
+        var passwordMinValidator = new constraints.MinConstraint(4)
+        errors = passwordMinValidator
+            .validate("password", "密码", {"password": "abc"})
+        expect(errors).not.toEqual([])
+
+        errors = passwordMinValidator
+            .validate("password", "密码", {"password": "abc4"})
+        expect(errors).toEqual([])
     })
 })
 

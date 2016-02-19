@@ -30,15 +30,15 @@ router.post('/', function(req, res, next) {
 router.all('/signin', function(req, res) {
     var signin = validator("SigninForm")
         .field("username")
-            .label('用户名')
-            .description("电子邮件地址作为登录凭证")
+            .label('Username')
+            .description("email address as login credentials")
             .placeholder('example@example.com')
             .required()
             .email()
         .field("password")
-            .label("密码")
-            .description("密码必须大于4位")
-            .placeholder("请输入密码")
+            .label("Password")
+            .description("Password length must greater 4")
+            .placeholder("Please type a strong password")
             .required()
             .min(4)
             .constraint(function(fieldName, fieldLabel, data) {
@@ -54,7 +54,7 @@ router.all('/signin', function(req, res) {
                 }
                 return User.findOne(query).then(function(user) {
                     if (null == user) {
-                        return ["错误的用户名或者密码"]
+                        return ["Wrong username or password"]
                     }
                 }).catch(function(error) {
                     console.stack(error)

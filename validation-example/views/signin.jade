@@ -6,20 +6,20 @@ block content
       .col-md-4
         div(class=['panel', 'panel-default'])
           .panel-heading
-            h3(class='panel-title') 注册
+            h3(class='panel-title') Signin
           .panel-body
             form(method="post", enctype="application/x-www-form-urlencoded")
               div(class=['form-group', form.username.hasErrors() ? 'has-error':''])
-                label(for='email', class='control-label') 邮件地址
+                label(for='email', class='control-label') Username
                 input(type='email', class='form-control', placeholder='#{form.username.placeholder}', name="username", value='#{form.username.value}')
                 if form.username.hasErrors()
                   each error in form.username.errors
                     span(class='help-block') #{error.message}
               div(class=['form-group', form.password.hasErrors() ? 'has-error':''])
-                label(for='password') 密码
+                label(for='password') Password
                 input(type='password', class='form-control', placeholder='#{form.password.placeholder}', name="password", value='#{form.password.value}')
                 each error in form.password.errors
                   span(class='help-block') #{error.message}
-              button(type='submit', class=['btn', 'btn-primary']) 登录
-              a(href="/", id="signup_link") 注册
-              a(href="/forgot") 忘记密码?
+              button(type='submit', class=['btn', 'btn-primary']) Signin
+              a(href="/", id="signup_link") Signup
+              a(href="/forgot") forgot?
