@@ -1,13 +1,32 @@
 var _ = require("underscore"),
     sprintf = require("sprintf-js").sprintf,
     constraints = require("../lib/constraints"),
-    validation = require("../lib/validation"),
-    result = require("../lib/result")
+    validation = require("../lib/validation")
 
 // 2016年2月6日
 // 想要把写Library的过程写成一个故事
 
-// 在validation-example中新增自定义约束
+// var debug = require('debug')
+// debug.log = console.info.bind(console)
+// debug('test')
+// console.log(require('process').env)
+
+ddescribe("为字段初始化值", function() {
+    validation.validator("Initializer")
+        .field("field1")
+            .label("Field 1")
+            .example("imcj")
+            .value("field1")
+
+
+    iit("validate", function(done) {
+        var initializer = validation.validator("Initializer").new()
+        expect(initializer.field1.value).toEqual("field1")
+        initializer.validate({"field1": "123"}).then(function() {
+            done()
+        })
+    })
+})
 
 describe("RegistrationForm example", function() {
     validation.validator("RegistrationForm")
